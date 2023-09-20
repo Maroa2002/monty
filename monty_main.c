@@ -23,7 +23,7 @@ void line_processing(FILE *file, char *line,
 		{NULL, NULL}
 	};
 
-	tok_opcode = strtok(line, " \t\ni\a");
+	tok_opcode = strtok(line, " \t\n\a");
 	if (tok_opcode == NULL)
 		return;
 
