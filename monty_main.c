@@ -23,6 +23,7 @@ void line_processing(FILE *file, char *line,
 		{"pop", monty_pop},
 		{"swap", monty_swap},
 		{"add", monty_add},
+		{"nop", monty_nop},
 		{NULL, NULL}
 	};
 
