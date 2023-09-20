@@ -19,14 +19,13 @@ void line_processing(FILE *file, char *line,
 	static instruction_t directives[] = {
 		{"push", monty_push},
 		{"pall", monty_pall},
+		{"pint", monty_pint},
 		{NULL, NULL}
 	};
 
 	tok_opcode = strtok(line, " \t\ni\a");
 	if (tok_opcode == NULL)
-	{
 		return;
-	}
 
 	arg = strtok(NULL, " \t\n\a");
 	while (directives[i].opcode)
@@ -41,7 +40,7 @@ void line_processing(FILE *file, char *line,
 
 	if (!directives[i].opcode)
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", *line_number, tok_opcode);
+		fprintf(stderr, "L%u: unknown instruction %s\n", *line_number, tok_opcode);
 		free(line);
 		fclose(file);
 		exit(EXIT_FAILURE);
