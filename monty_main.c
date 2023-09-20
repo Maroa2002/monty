@@ -20,6 +20,7 @@ void line_processing(FILE *file, char *line,
 		{"push", monty_push},
 		{"pall", monty_pall},
 		{"pint", monty_pint},
+		{"pop", monty_pop},
 		{NULL, NULL}
 	};
 
