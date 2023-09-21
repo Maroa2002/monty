@@ -24,6 +24,7 @@ void line_processing(FILE *monty_file, char *file_line,
 		{"swap", monty_swap},
 		{"add", monty_add},
 		{"sub", monty_sub},
+		{"div", monty_div},
 		{"nop", monty_nop},
 		{NULL, NULL}
 	};
