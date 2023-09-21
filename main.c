@@ -17,24 +17,21 @@ void line_processing(FILE *monty_file, char *file_line,
 	int i = 0;
 	char *tok_opcode;
 	instruction_t directives[] = {
-		{"push", monty_push},
-		{"pall", monty_pall},
-		{"pint", monty_pint},
-		{"pop", monty_pop},
-		{"swap", monty_swap},
-		{"add", monty_add},
-		{"sub", monty_sub},
-		{"div", monty_div},
-		{"mul", monty_mul},
-		{"mod", monty_mod},
-		{"nop", monty_nop},
-		{NULL, NULL}
+		{"push", monty_push}, {"pall", monty_pall},
+		{"pint", monty_pint}, {"pop", monty_pop},
+		{"swap", monty_swap}, {"add", monty_add},
+		{"sub", monty_sub}, {"div", monty_div},
+		{"mul", monty_mul}, {"mod", monty_mod},
+		{"nop", monty_nop}, {NULL, NULL}
 	};
 
+	while (file_line[i] == ' ' || file_line[i] == '\t')
+		i++;
+	if (file_line[i] == '#')
+		return;
 	tok_opcode = strtok(file_line, " \t\n\a");
 	if (tok_opcode == NULL)
 		return;
-
 	arg = strtok(NULL, " \t\n\a");
 	while (directives[i].opcode)
 	{
@@ -45,7 +42,6 @@ void line_processing(FILE *monty_file, char *file_line,
 		}
 		i++;
 	}
-
 	if (!directives[i].opcode)
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", *line_number, tok_opcode);
