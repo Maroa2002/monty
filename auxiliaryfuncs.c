@@ -19,3 +19,21 @@ int is_int(const char *str)
 	}
 	return (0);
 }
+
+/**
+  * free_mem - frees the stack
+  * @stack: doubly linked implementation of the stack
+  * Return: Nothing
+  **/
+
+void free_mem(stack_t *stack)
+{
+	stack_t *tmp, *ptr = stack;
+
+	while (ptr != NULL)
+	{
+		tmp = ptr;
+		ptr = ptr->next;
+		free(tmp);
+	}
+}

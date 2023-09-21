@@ -17,6 +17,7 @@ void monty_push(stack_t **stack, unsigned int line_number)
 	if (!arg || is_int(arg) == -1)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		free_mem(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -71,6 +72,7 @@ void monty_pint(stack_t **stack, unsigned int line_number)
 	if (!stack || !*stack)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		free_mem(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -91,6 +93,7 @@ void monty_pop(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		free_mem(*stack);
 		exit(EXIT_FAILURE);
 	}
 
