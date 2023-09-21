@@ -44,7 +44,7 @@ extern char *arg;
 int is_int(const char *str);
 void monty_push(stack_t **stack, unsigned int line_number);
 void monty_pall(stack_t **stack, unsigned int line_number);
-void line_processing(FILE *file, char *line, stack_t **stack, unsigned int *line_number);
+void line_processing(FILE *monty_file, char *file_line, stack_t **stack, unsigned int *line_number);
 void monty_pint(stack_t **stack, unsigned int line_number);
 void monty_pop(stack_t **stack, unsigned int line_number);
 void monty_swap(stack_t **stack, unsigned int line_number);

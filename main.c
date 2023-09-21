@@ -4,19 +4,19 @@ char *arg = NULL;
 
 /**
   * line_processing - handles line processing of monty files
-  * @file: monty bytecode file
-  * @line: line read
+  * @monty_file: monty bytecode file
+  * @file_line: line read
   * @stack: doubli linked implementation of stacks
   * @line_number: line number
   * Return: Nothing
   **/
 
-void line_processing(FILE *file, char *line,
+void line_processing(FILE *monty_file, char *file_line,
 		stack_t **stack, unsigned int *line_number)
 {
 	int i = 0;
 	char *tok_opcode;
-	static instruction_t directives[] = {
+	instruction_t directives[] = {
 		{"push", monty_push},
 		{"pall", monty_pall},
 		{"pint", monty_pint},
@@ -27,7 +27,7 @@ void line_processing(FILE *file, char *line,
 		{NULL, NULL}
 	};
 
-	tok_opcode = strtok(line, " \t\n\a");
+	tok_opcode = strtok(file_line, " \t\n\a");
 	if (tok_opcode == NULL)
 		return;
 
@@ -45,8 +45,8 @@ void line_processing(FILE *file, char *line,
 	if (!directives[i].opcode)
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", *line_number, tok_opcode);
-		free(line);
-		fclose(file);
+		free(file_line);
+		fclose(monty_file);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -60,10 +60,9 @@ void line_processing(FILE *file, char *line,
 
 int main(int argc, char **argv)
 {
-	FILE *isFile;
+	FILE *monty_file = NULL;
 	char *file_line = NULL;
 	size_t length = 0;
-	ssize_t linesread;
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
 
@@ -73,22 +72,22 @@ int main(int argc, char **argv)
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
+
 	/* file opening */
-	isFile = fopen(argv[1], "r");
-	if (isFile == NULL)
+	monty_file = fopen(argv[1], "r");
+	if (!monty_file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	linesread = getline(&file_line, &length, isFile);
-	while (linesread != -1)
+
+	while (getline(&file_line, &length, monty_file) != -1)
 	{
 		line_number += 1;
-		line_processing(isFile, file_line, &stack, &line_number);
-		linesread = getline(&file_line, &length, isFile);
+		line_processing(monty_file, file_line, &stack, &line_number);
 	}
 	free(file_line);
-	fclose(isFile);
+	fclose(monty_file);
 
 	return (0);
 }
