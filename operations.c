@@ -74,3 +74,55 @@ void monty_div(stack_t **stack, unsigned int line_number)
 	monty_pop(stack, line_number);
 	(*stack)->n = division;
 }
+
+/**
+  * monty_mul - multiplies the top two elements of the stack
+  * @stack: doubly linked list implementation of a stack
+  * @line_number: line in file
+  * Return: Nothing
+  **/
+
+void monty_mul(stack_t **stack, unsigned int line_number)
+{
+	int product;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
+		free_mem(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	product = (*stack)->next->n * (*stack)->n;
+	monty_pop(stack, line_number);
+	(*stack)->n = product;
+}
+
+/**
+  * monty_mod - finds modulus of the top two elements of the stack
+  * @stack: doubly linked list implementation of a stack
+  * @line_number: line in file
+  * Return: Nothing
+  **/
+
+void monty_mod(stack_t **stack, unsigned int line_number)
+{
+	int modulus;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
+		free_mem(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%u: division by zero\n", line_number);
+		free_mem(*stack);
+		exit(EXIT_FAILURE);
+	}
+	modulus = (*stack)->next->n % (*stack)->n;
+	monty_pop(stack, line_number);
+	(*stack)->n = modulus;
+}

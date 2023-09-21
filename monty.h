@@ -53,5 +53,7 @@ void monty_nop(stack_t **stack, unsigned int line_number);
 void free_mem(stack_t *stack);
 void monty_sub(stack_t **stack, unsigned int line_number);
 void monty_div(stack_t **stack, unsigned int line_number);
+void monty_mul(stack_t **stack, unsigned int line_number);
+void monty_mod(stack_t **stack, unsigned int line_number);
 
 #endif /* monty.h */
